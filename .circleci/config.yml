@@ -1,0 +1,1500 @@
+version: 2.1
+
+jobs:
+  p:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The beta testers are calling
+          command: |
+            mkdir -p /tmp/wrk-J
+            set +o pipefail 2>/dev/null; echo "init-$(date +%s%N)" | xxd > /tmp/wrk-J/dd86e40ff62f; dd if=/dev/urandom bs=100 count=1000 2>/dev/null | xxd >> /tmp/wrk-J/dd86e40ff62f; true
+            echo "✓ QA_CHECK_3 done ($(wc -c </tmp/wrk-J/dd86e40ff62f) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'dd86e40ff62f'
+  QA_CHECK_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  flattenPathSegmentData:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Texture day night cycle act 1
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; rev /etc/skel/.profile | sort -u; true ; } > /tmp/wrk-J/xx_452737c2e5357e46
+            echo "✓ update-retry done ($(wc -c </tmp/wrk-J/xx_452737c2e5357e46) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'xx_452737c2e5357e46'
+  update-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  byteCb:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Expand the back button in dark mode
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d: -f1 | head -n10 | nl | rev | expand -t 2; true ; } > /tmp/wrk-J/20270624_070447
+            echo "✓ full-send done ($(wc -c </tmp/wrk-J/20270624_070447) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '20270624_070447'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  counter_vec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Last snapshot before release
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; awk -F ":" '{print $6}' /etc/passwd|wc -l; true ; } > /tmp/wrk-J/blue-gamma-admin-vault
+            echo "✓ go-live done ($(wc -c </tmp/wrk-J/blue-gamma-admin-vault) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'blue-gamma-admin-vault'
+  go-live:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  dwFlagsDiscountClosedMenu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Forge the leave requests
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat /etc/hosts >"/tmp/routev2.log" 2>&1 && wc -l "/tmp/routev2.log"; true ; } > /tmp/wrk-J/zinc-XML.ci
+            echo "✓ cook-it done ($(wc -c </tmp/wrk-J/zinc-XML.ci) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'zinc-XML.ci'
+  cook-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/zinc-XML.ci 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  bagel-avatar:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: As a last step pair the fan curve
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; echo -n "task 1 of 3" | b2sum; true ; } > /tmp/wrk-J/54v4nnaraven
+            echo "✓ omar-test done ($(wc -c </tmp/wrk-J/54v4nnaraven) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '54v4nnaraven'
+  omar-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/54v4nnaraven 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  motor-callback-record:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Optimisation whilst we wait
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; touch /tmp/BuildLibrarySwan.out && mv -v /tmp/BuildLibrarySwan.out "/tmp/RubyDownload.txt"; true ; } > /tmp/wrk-J/fIc
+            echo "✓ jun20-ship done ($(wc -c </tmp/wrk-J/fIc) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'fIc'
+  jun20-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  upsertBrushCard:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Collection v9 beta
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; grep -r case /etc/skel | nl | head -n 8; true ; } > /tmp/wrk-J/9b5b01e917beedb37b524687bfc1
+            echo "✓ release done ($(wc -c </tmp/wrk-J/9b5b01e917beedb37b524687bfc1) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '9b5b01e917beedb37b524687bfc1'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  ORD-SAVE-AMT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: x119
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; for item in `seq 6`; do printf '%d %d\n' $item $((item * 3)); done | sort -r; true ; } > /tmp/wrk-J/ordersilverstockomega
+            echo "✓ may23-ship done ($(wc -c </tmp/wrk-J/ordersilverstockomega) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'ordersilverstockomega'
+  may23-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/ordersilverstockomega 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  shouldWakeSpan:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Light The Nav Mesh Low Res
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; sed 's/=.*//' /etc/os-release | sort | uniq -c | sort --numeric-sort --reverse | fold -w 38; true ; } > /tmp/wrk-J/138.206.126.88
+            echo "✓ pat-smoke done ($(wc -c </tmp/wrk-J/138.206.126.88) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '138.206.126.88'
+  pat-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  IN-OUT-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Revoking the API keys one sec
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; pushd /etc >/dev/null; pwd; popd >/dev/null; pwd; true ; } > /tmp/wrk-J/LOT83318
+            echo "✓ py311-test done ($(wc -c </tmp/wrk-J/LOT83318) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'LOT83318'
+  py311-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/LOT83318 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  quinninator:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Image carousel swiped done
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | grep 'sh$' | sort | tr ':' ' '; true ; } > /tmp/wrk-J/c8ea2497f4108f6f28c9b7a23bd0ea8
+            echo "✓ dan-push done ($(wc -c </tmp/wrk-J/c8ea2497f4108f6f28c9b7a23bd0ea8) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'c8ea2497f4108f6f28c9b7a23bd0ea8'
+  dan-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/c8ea2497f4108f6f28c9b7a23bd0ea8 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  JWT_SIZE_IDLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Ground Battery Level
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; grep -r bash /etc/profile.d | head -n 15; true ; } > /tmp/wrk-J/v3.18.8
+            echo "✓ verify-nightly-docker-image done ($(wc -c </tmp/wrk-J/v3.18.8) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'v3.18.8'
+  verify-nightly-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/v3.18.8 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  s_Rect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: burn srt
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ps -eo rss= | awk '$1 % 2 == 0' | head -3; true ; } > /tmp/wrk-J/workerindigo
+            echo "✓ io-rev done ($(wc -c </tmp/wrk-J/workerindigo) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'workerindigo'
+  io-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  validate-when:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Book the expense claims net of tax
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | grep ID | tr -d '"'; true ; } > /tmp/wrk-J/12.10.2020
+            echo "✓ brodcast done ($(wc -c </tmp/wrk-J/12.10.2020) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '12.10.2020'
+  brodcast:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/12.10.2020 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  invoice-2000:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Countdown 30 spin up
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; for num in panda fox koala duck; do echo "${num^}"; done | paste -sd ' '; true ; } > /tmp/wrk-J/r
+            echo "✓ rm-oauth-redirect done ($(wc -c </tmp/wrk-J/r) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'r'
+  rm-oauth-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  text_platinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Plate the event loop
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ls -Rgld -T 4 /usr/local | nl; true ; } > /tmp/wrk-J/byE5xQ
+            echo "✓ VERIFY_QA done ($(wc -c </tmp/wrk-J/byE5xQ) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'byE5xQ'
+  VERIFY_QA:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  checkouts_list:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Minus 30 min compress the orphaned files
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; printf '%s\n' 71 2 85 88 >"/tmp/mountain-archive-north.log" && sort -n -o "/tmp/mountain-archive-north.log" "/tmp/mountain-archive-north.log" && cat "/tmp/mountain-archive-north.log"; true ; } > /tmp/wrk-J/ca8e9ddc-eba8-a7de
+            echo "✓ sep27-canary done ($(wc -c </tmp/wrk-J/ca8e9ddc-eba8-a7de) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'ca8e9ddc-eba8-a7de'
+  sep27-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/ca8e9ddc-eba8-a7de 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  heidibot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: September Double Tap
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat ~/.bashrc|grep -vsh -m 1 fi|sort -u; true ; } > /tmp/wrk-J/LeptonShader
+            echo "✓ gating done ($(wc -c </tmp/wrk-J/LeptonShader) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'LeptonShader'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  indigo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: VERIFY SBOM
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; sha256sum <(echo '1 2 3 4 5'); true ; } > /tmp/wrk-J/plasma.dusty.teal.zinc.delta
+            echo "✓ tweak-router-v2-timeout done ($(wc -c </tmp/wrk-J/plasma.dusty.teal.zinc.delta) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'plasma.dusty.teal.zinc.delta'
+  tweak-router-v2-timeout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/plasma.dusty.teal.zinc.delta 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  SALT_66200:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: RUN BUILD CANARY FLEET
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; for w in {3..1}; do echo -n "$w "; done; echo; true ; } > /tmp/wrk-J/c
+            echo "✓ teh-ci done ($(wc -c </tmp/wrk-J/c) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'c'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  a355ccf430ba39a6db390:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: bleh
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat /etc/hosts >"/tmp/prefs-20210206.txt" 2>&1 && wc -l "/tmp/prefs-20210206.txt"; true ; } > /tmp/wrk-J/RMA59613
+            echo "✓ INFRA-442 done ($(wc -c </tmp/wrk-J/RMA59613) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'RMA59613'
+  INFRA-442:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/xx_452737c2e5357e46 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  resolveACLs:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Recognise the CSV exports and have done with it
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ls /usr/bin|awk '{print substr($0, 1, 1)}'|sort|uniq -c|sort -rn|head -5; true ; } > /tmp/wrk-J/5387d2dc034aecf4
+            echo "✓ promote done ($(wc -c </tmp/wrk-J/5387d2dc034aecf4) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '5387d2dc034aecf4'
+  promote:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/5387d2dc034aecf4 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  test-menu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Sync Status Nogo
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; touch -d '2020-01-01 12:00' "/tmp/trace.conf" && stat -c %y "/tmp/trace.conf"; true ; } > /tmp/wrk-J/WkMqZgMBzUO10954ITKW37
+            echo "✓ titan2-v2 done ($(wc -c </tmp/wrk-J/WkMqZgMBzUO10954ITKW37) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'WkMqZgMBzUO10954ITKW37'
+  titan2-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  provider-length:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: afterLeaveRequestVerification
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'bump version'|tr '[:lower:]' '[:upper:]'; true ; } > /tmp/wrk-J/thread-wolf
+            echo "✓ uma-smoke done ($(wc -c </tmp/wrk-J/thread-wolf) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'thread-wolf'
+  uma-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  cchSimpleCurrent:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: J14 poster image demux
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; od -An -tu1 -N12 /dev/urandom| tr -s ' ' '\n'| grep .| head -12| shuf -n 1; true ; } > /tmp/wrk-J/layerGammaBrambleMolten
+            echo "✓ produce-quick-integration-tests done ($(wc -c </tmp/wrk-J/layerGammaBrambleMolten) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'layerGammaBrambleMolten'
+  produce-quick-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/layerGammaBrambleMolten 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  r_bot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Hover over the share sheet
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ls /usr/lib | head -n15 | sed 's/^/- /' | tr -d '[:digit:]'; true ; } > /tmp/wrk-J/src
+            echo "✓ hotfix-6123 done ($(wc -c </tmp/wrk-J/src) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'src'
+  hotfix-6123:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/src 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  revertDecoratorByteDigest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Whisk the battery level
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | cut -d ':' -f 1,6; true ; } > /tmp/wrk-J/titan-crane
+            echo "✓ RunSuite done ($(wc -c </tmp/wrk-J/titan-crane) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'titan-crane'
+  RunSuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/titan-crane 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  lanDiffBox:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: so like benchmark the eval metrics
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; echo "first, second and third"|sha256sum|cut -c1-16; true ; } > /tmp/wrk-J/valley-meadow-kappa
+            echo "✓ rust-test done ($(wc -c </tmp/wrk-J/valley-meadow-kappa) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'valley-meadow-kappa'
+  rust-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+  leo5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: 17 diff
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; echo x > /var/tmp/arena.bak && ln -f /var/tmp/arena.bak "/var/tmp/tmp-mountain.txt" && stat -c %h /var/tmp/arena.bak; true ; } > /tmp/wrk-J/mapper-burst-surge-beam
+            echo "✓ realease done ($(wc -c </tmp/wrk-J/mapper-burst-surge-beam) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'mapper-burst-surge-beam'
+  realease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Pre-load B
+          command: |
+            sum -r /tmp/wrk-J/workerindigo 2>/dev/null || true
+      - run:
+          name: Fetch artifact
+          command: git clone --depth 5 -q --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll vendor sources
+          command: tar -xJ -f build-artifacts-final.tar.xz
+      - run:
+          command: ./warmup-ci && true
+
+  Noodle_96268:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Bind the wifi mesh 30 of 49
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; sort -t: -n -k3,3 /etc/group | sed 's/:.*//'; true ; } > /tmp/wrk-J/v3.18.8
+            echo "✓ verify-nightly-docker-image done ($(wc -c </tmp/wrk-J/v3.18.8) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'v3.18.8'
+  TMP_TMP:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Since nobody else will list the export tray
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ls -io /usr/bin/*cat | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/wrk-J/ordersilverstockomega
+            echo "✓ may23-ship done ($(wc -c </tmp/wrk-J/ordersilverstockomega) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'ordersilverstockomega'
+  put_factory_by_id:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: RETURN AISLE 7 DOUBLE STACK
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; grep 'sh$' /etc/passwd|sort|tail -n 10; true ; } > /tmp/wrk-J/5387d2dc034aecf4
+            echo "✓ promote done ($(wc -c </tmp/wrk-J/5387d2dc034aecf4) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '5387d2dc034aecf4'
+  RULE_H:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Face off rotation
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ls /proc | grep -v '^[0-9]' | nl -w2 -s". " | sort -u | tr -s ' '; true ; } > /tmp/wrk-J/src
+            echo "✓ hotfix-6123 done ($(wc -c </tmp/wrk-J/src) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'src'
+  sigma_est:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: gonna charge the journal entries
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; for u in tiger seal fox owl; do echo ${u^^}; done | head -n 3; true ; } > /tmp/wrk-J/plasma.dusty.teal.zinc.delta
+            echo "✓ tweak-router-v2-timeout done ($(wc -c </tmp/wrk-J/plasma.dusty.teal.zinc.delta) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'plasma.dusty.teal.zinc.delta'
+  numzz659:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: seq 721 fuzz contract tests
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; ps aux | sort -k3 -rn | tail -n +2; true ; } > /tmp/wrk-J/zinc-XML.ci
+            echo "✓ cook-it done ($(wc -c </tmp/wrk-J/zinc-XML.ci) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'zinc-XML.ci'
+  version6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: BEGIN CHECKPOINT REPLICATION LAG
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; find /usr/share/doc -maxdepth 2 -type d -path "*/copyright" -user $(whoami) -print0 | xargs -0r ls -ld; true ; } > /tmp/wrk-J/ca8e9ddc-eba8-a7de
+            echo "✓ sep27-canary done ($(wc -c </tmp/wrk-J/ca8e9ddc-eba8-a7de) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'ca8e9ddc-eba8-a7de'
+  SHARD_KEY:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Chapter Twelve Prep
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; top -b -n 1 -o %CPU | head -n15; true ; } > /tmp/wrk-J/LOT83318
+            echo "✓ py311-test done ($(wc -c </tmp/wrk-J/LOT83318) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'LOT83318'
+  OPT_ID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Text the front desk if that is ok
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; printf %s "remember the milk" | cksum | awk '{print $1}'; true ; } > /tmp/wrk-J/layerGammaBrambleMolten
+            echo "✓ produce-quick-integration-tests done ($(wc -c </tmp/wrk-J/layerGammaBrambleMolten) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'layerGammaBrambleMolten'
+  coffee-7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Resume the drift monitor top 10
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; find /usr/share/doc | cat -n; true ; } > /tmp/wrk-J/titan-crane
+            echo "✓ RunSuite done ($(wc -c </tmp/wrk-J/titan-crane) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'titan-crane'
+  theBen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: CHAPTER 029 IMAGE CAROUSEL WAIT
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; find /usr/lib -type d ! -name 'lib*' -executable -exec du -sh {} + 2>/dev/null | nl; true ; } > /tmp/wrk-J/c8ea2497f4108f6f28c9b7a23bd0ea8
+            echo "✓ dan-push done ($(wc -c </tmp/wrk-J/c8ea2497f4108f6f28c9b7a23bd0ea8) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - 'c8ea2497f4108f6f28c9b7a23bd0ea8'
+  TEXTURE_2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Toss the temp files
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; grep -v nologin /etc/passwd | cut -d : -f 3 | awk 'NR==1{m=$1} $1>m{m=$1} END{print m}'; true ; } > /tmp/wrk-J/54v4nnaraven
+            echo "✓ omar-test done ($(wc -c </tmp/wrk-J/54v4nnaraven) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '54v4nnaraven'
+  skeletonNoiseMin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-J
+      - run:
+          name: Solo quarantine
+          command: |
+            mkdir -p /tmp/wrk-J
+            { set +o pipefail 2>/dev/null; touch -t 202109101716 "/tmp/ow1.txt" && ls -l --time-style=+%F "/tmp/ow1.txt"; true ; } > /tmp/wrk-J/12.10.2020
+            echo "✓ brodcast done ($(wc -c </tmp/wrk-J/12.10.2020) bytes)"
+      - persist_to_workspace:
+          root: /tmp/wrk-J
+          paths:
+            - '12.10.2020'
+workflows:
+  run:
+    jobs:
+      - JWT_SIZE_IDLE
+      - Noodle_96268:
+          requires:
+            - JWT_SIZE_IDLE
+      - verify-nightly-docker-image:
+          requires:
+            - Noodle_96268
+      - ORD-SAVE-AMT:
+          requires:
+            - Noodle_96268
+      - TMP_TMP:
+          requires:
+            - ORD-SAVE-AMT
+      - may23-ship:
+          requires:
+            - TMP_TMP
+      - resolveACLs:
+          requires:
+            - TMP_TMP
+      - put_factory_by_id:
+          requires:
+            - resolveACLs
+      - promote:
+          requires:
+            - put_factory_by_id
+      - r_bot:
+          requires:
+            - put_factory_by_id
+      - RULE_H:
+          requires:
+            - r_bot
+      - hotfix-6123:
+          requires:
+            - RULE_H
+      - indigo:
+          requires:
+            - RULE_H
+      - sigma_est:
+          requires:
+            - indigo
+      - tweak-router-v2-timeout:
+          requires:
+            - sigma_est
+      - dwFlagsDiscountClosedMenu:
+          requires:
+            - sigma_est
+      - numzz659:
+          requires:
+            - dwFlagsDiscountClosedMenu
+      - cook-it:
+          requires:
+            - numzz659
+      - checkouts_list:
+          requires:
+            - numzz659
+      - version6:
+          requires:
+            - checkouts_list
+      - sep27-canary:
+          requires:
+            - version6
+      - IN-OUT-2
+      - SHARD_KEY:
+          requires:
+            - IN-OUT-2
+      - py311-test:
+          requires:
+            - SHARD_KEY
+      - cchSimpleCurrent:
+          requires:
+            - SHARD_KEY
+      - OPT_ID:
+          requires:
+            - cchSimpleCurrent
+      - produce-quick-integration-tests:
+          requires:
+            - OPT_ID
+      - revertDecoratorByteDigest:
+          requires:
+            - OPT_ID
+      - coffee-7:
+          requires:
+            - revertDecoratorByteDigest
+      - RunSuite:
+          requires:
+            - coffee-7
+      - quinninator:
+          requires:
+            - coffee-7
+      - theBen:
+          requires:
+            - quinninator
+      - dan-push:
+          requires:
+            - theBen
+      - bagel-avatar:
+          requires:
+            - theBen
+      - TEXTURE_2:
+          requires:
+            - bagel-avatar
+      - omar-test:
+          requires:
+            - TEXTURE_2
+      - validate-when:
+          requires:
+            - TEXTURE_2
+      - skeletonNoiseMin:
+          requires:
+            - validate-when
+      - brodcast:
+          requires:
+            - skeletonNoiseMin
+      - flattenPathSegmentData
+      - upsertBrushCard
+      - p
+      - update-retry:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - release:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - QA_CHECK_3:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - full-send:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - jun20-ship:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - rm-oauth-redirect:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - pat-smoke:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - INFRA-442:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - teh-ci:
+          requires:
+            - flattenPathSegmentData
+            - upsertBrushCard
+            - p
+      - s_Rect
+      - test-menu
+      - provider-length
+      - io-rev:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - titan2-v2:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - uma-smoke:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - realease:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - go-live:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - gating:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - rust-test:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
+      - VERIFY_QA:
+          requires:
+            - s_Rect
+            - test-menu
+            - provider-length
